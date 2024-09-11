@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bookstore</title>
+</head>
+<body>
+    <h1>Welcome to the Bookstore</h1>
+    <h2>Inventory Overview</h2>
+    <table border="1">
+        <tr>
+            <th>Book Title</th>
+            <th>Stock</th>
+            <th>Restocking Required</th>
+            <th>Total Value</th>
+            <th>Sales Tax</th>
+        </tr>
+        <?php foreach ($books as $bookTitle => $data) { ?>
+        <tr>
+            <td><?= htmlspecialchars($bookTitle) ?></td>
+            <td><?= $data['stock'] ?></td>
+            <td><?= needsRestocking($data['stock']) ?></td>
+            <td>$<?= number_format(computeTotalCost($data['price'], $data['stock']), 2) ?></td>
+            <td>$<?= number_format(computeSalesTax($data['price'], $data['stock'], $salesTaxRate), 2) ?></td>
+        </tr>
+        <?php } ?>
+    </table>
+</body>
+</html>
